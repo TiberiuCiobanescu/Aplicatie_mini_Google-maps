@@ -11,6 +11,13 @@ class MainWindow(QMainWindow):
 
         self.controller = Controller(self.ui)
         self.ui.calcButton.clicked.connect(self.controller.calculeaza_ruta)
+        
+        self.ui.destLine.returnPressed.connect(self.controller.calculeaza_ruta)
+        self.ui.startLine.returnPressed.connect(self.controller.calculeaza_ruta)
+
+        self.ui.mapLabel.setScaledContents(True)
+        self.resize(1200, 800)
+
 
 app = QApplication(sys.argv)
 f = MainWindow()
