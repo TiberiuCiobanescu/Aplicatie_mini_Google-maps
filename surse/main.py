@@ -4,6 +4,7 @@ from PyQt6.QtCore import Qt
 from PyQt6.QtGui import QTransform
 from ui_interfata import Ui_MainWindow
 from controller import Controller
+from PyQt6 import QtWidgets, QtCore
 
 
 class MapView(QGraphicsView):
@@ -39,18 +40,33 @@ class MainWindow(QMainWindow):
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
 
+        self.infoLabel = QtWidgets.QLabel(self)
+        self.infoLabel.setAlignment(QtCore.Qt.AlignmentFlag.AlignCenter)
+        self.infoLabel.setText("Introduceți două locații din București")
+        self.infoLabel.setStyleSheet("""
+            QLabel {
+                padding: 6px;
+                font-size: 14px;
+                color: #ffffff;
+            }
+        """)
+   
+
+
         self.controller = Controller(self.ui, self)
         self.ui.calcButton.clicked.connect(self.controller.calculeaza_ruta)
         self.ui.destLine.returnPressed.connect(self.controller.calculeaza_ruta)
         self.ui.startLine.returnPressed.connect(self.controller.calculeaza_ruta)
 
         self.ui.mapLabel.hide()
-
+       
         self.graphicsView = MapView(self.ui.centralwidget)
         self.scene = QGraphicsScene(self.graphicsView)
         self.graphicsView.setScene(self.scene)
 
+        self.ui.verticalLayout.addWidget(self.infoLabel)
         self.ui.verticalLayout.addWidget(self.graphicsView)
+
 
         self.graphicsView.setDragMode(QGraphicsView.DragMode.ScrollHandDrag)
         self.graphicsView.setTransformationAnchor(QGraphicsView.ViewportAnchor.AnchorUnderMouse)

@@ -33,11 +33,24 @@ class Controller:
         dist_m = sum(lungimi)
         dist_km = dist_m/1000
 
-        viteza_masina=35   
-        viteza_pieton=5
+        viteza_masina=30 
+        viteza_pieton=4
 
         timp_masina_min=dist_km/viteza_masina*60
         timp_pieton_min=dist_km/viteza_pieton*60
+
+        def format_timp(minute):
+            minute = int(round(minute))
+            if minute < 60:
+                return f"{minute} min"
+            ore = minute // 60
+            rest_min = minute % 60
+            if rest_min == 0:
+                return f"{ore} h"
+            return f"{ore} h {rest_min} min"
+
+        text_masina = format_timp(timp_masina_min)
+        text_pieton = format_timp(timp_pieton_min)
 
         img_path = self.viewer.genereaza_imagine(G, ruta)
        
@@ -54,4 +67,9 @@ class Controller:
             Qt.AspectRatioMode.KeepAspectRatio
         )
 
-        self.ui.statusbar.showMessage(f"Distanță: {dist_km:.2f} km | Mașina: ~{timp_masina_min:.0f} min | Pe jos: ~{timp_pieton_min:.0f} min")
+        self.main_window.infoLabel.setText(
+            f" Mașina: <b>{text_masina}</b>   |   "
+            f" Pe jos: <b>{text_pieton}</b>   |   "
+            f" Distanță: <b>{dist_km:.2f} km</b>"
+        )
+
