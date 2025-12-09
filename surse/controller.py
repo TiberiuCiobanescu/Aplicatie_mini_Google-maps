@@ -12,21 +12,30 @@ class Controller:
         self.viewer = VizualizareHarta()
 
     def calculeaza_ruta(self):
+        self.main_window.loadingLabel.show()
+        self.ui.calcButton.setEnabled(False)
+
         plecare = self.ui.startLine.text().strip()
         sosire = self.ui.destLine.text().strip()
 
         if not plecare or not sosire:
             self.ui.mapLabel.setText("Introduceți plecare și sosire!")
+            self.main_window.loadingLabel.hide()
+            self.ui.calcButton.setEnabled(True)
             return
 
         if plecare.lower() == sosire.lower():
             self.ui.mapLabel.setText("Plecarea și sosirea nu pot fi identice.")
+            self.main_window.loadingLabel.hide()
+            self.ui.calcButton.setEnabled(True)
             return
 
         G, ruta = self.loader.incarca_ruta(plecare, sosire)
 
         if G is None:
             self.ui.mapLabel.setText("Nu am putut găsi o rută între aceste adrese.")
+            self.main_window.loadingLabel.hide()
+            self.ui.calcButton.setEnabled(True)
             return
 
         lungimi = ox.utils_graph.get_route_edge_attributes(G, ruta, "length")
@@ -73,3 +82,5 @@ class Controller:
             f" Distanță: <b>{dist_km:.2f} km</b>"
         )
 
+        self.main_window.loadingLabel.hide()
+        self.ui.calcButton.setEnabled(True)

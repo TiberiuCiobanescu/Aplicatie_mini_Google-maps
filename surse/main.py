@@ -1,5 +1,5 @@
 import sys
-from PyQt6.QtWidgets import QApplication, QMainWindow, QGraphicsView, QGraphicsScene
+from PyQt6.QtWidgets import QApplication, QMainWindow, QGraphicsView, QGraphicsScene, QLabel, QHBoxLayout
 from PyQt6.QtCore import Qt
 from PyQt6.QtGui import QTransform
 from ui_interfata import Ui_MainWindow
@@ -40,18 +40,30 @@ class MainWindow(QMainWindow):
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
 
-        self.infoLabel = QtWidgets.QLabel(self)
+        self.infoLabel = QtWidgets.QLabel()
         self.infoLabel.setAlignment(QtCore.Qt.AlignmentFlag.AlignCenter)
-        self.infoLabel.setText("Introduceți două locații din București")
         self.infoLabel.setStyleSheet("""
-            QLabel {
-                padding: 6px;
-                font-size: 14px;
-                color: #ffffff;
-            }
+        QLabel {
+        font-size: 18px;
+        color: white;
+        padding: 6px;
+        }
         """)
-   
 
+        self.loadingLabel = QtWidgets.QLabel("Calculăm ruta…")
+        self.loadingLabel.setAlignment(QtCore.Qt.AlignmentFlag.AlignCenter)
+        self.loadingLabel.setStyleSheet("""
+        QLabel {
+        font-size: 16px;
+        color: yellow;
+        padding: 6px;
+        }
+        """)
+        self.loadingLabel.hide()
+
+
+        self.ui.verticalLayout.insertWidget(5, self.loadingLabel)
+        self.ui.verticalLayout.addWidget(self.infoLabel)
 
         self.controller = Controller(self.ui, self)
         self.ui.calcButton.clicked.connect(self.controller.calculeaza_ruta)
@@ -64,7 +76,6 @@ class MainWindow(QMainWindow):
         self.scene = QGraphicsScene(self.graphicsView)
         self.graphicsView.setScene(self.scene)
 
-        self.ui.verticalLayout.addWidget(self.infoLabel)
         self.ui.verticalLayout.addWidget(self.graphicsView)
 
 
