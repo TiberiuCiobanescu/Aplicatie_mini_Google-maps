@@ -22,7 +22,7 @@ class Controller:
             self.ui.mapLabel.setText("Introduceți plecare și sosire!")
             self.main_window.loadingLabel.hide()
             self.ui.calcButton.setEnabled(True)
-            return
+            return 
 
         if plecare.lower() == sosire.lower():
             self.ui.mapLabel.setText("Plecarea și sosirea nu pot fi identice.")
