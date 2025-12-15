@@ -18,7 +18,7 @@ class HartaLoader:
             return None
 
     def haversine(self, lat1, lon1, lat2, lon2):
-        # distanță aproximativă între două coordonate
+        # distanta aproximativa intre doua coordonate
         R = 6371e3
         phi1 = math.radians(lat1)
         phi2 = math.radians(lat2)
@@ -29,7 +29,7 @@ class HartaLoader:
         return 2*R*math.atan2(math.sqrt(a), math.sqrt(1-a))
 
     def nearest_node_manual(self, G, lat, lon):
-        # cautare nod cel mai apropiat (fără SciPy)
+        # cautare nod cel mai apropiat 
         min_dist = float("inf")
         closest_node = None
 
@@ -56,7 +56,7 @@ class HartaLoader:
             print("[INFO] Încărcăm harta Bucureștiului din cache.")
             G = ox.load_graphml(harta_path)
         else:
-            print("[INFO] Descărcăm harta rutieră a Bucureștiului (o singură dată)...")
+            print("[INFO] Descarcam harta rutiera a Bucurestiului (o singura data)...")
 
             G = ox.graph_from_bbox(
                 north=44.57,
@@ -68,14 +68,13 @@ class HartaLoader:
 
             ox.save_graphml(G, harta_path)
 
-        # folosim metoda noastră, FĂRĂ scipy:
         start = self.nearest_node_manual(G, coord1[0], coord1[1])
         end   = self.nearest_node_manual(G, coord2[0], coord2[1])
 
         try:
             ruta = nx.shortest_path(G, start, end, weight="length")
         except nx.NetworkXNoPath:
-            print("[ERROR] Nu există o rută între cele două adrese.")
+            print("[ERROR] Nu exista o ruta intre cele doua adrese.")
             return None, None
 
         return G, ruta

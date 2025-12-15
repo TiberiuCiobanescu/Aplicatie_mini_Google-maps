@@ -58,7 +58,7 @@ class MainWindow(QMainWindow):
         """)
 
         # LOADING LABEL 
-        self.loadingLabel = QtWidgets.QLabel("Calculăm ruta…")
+        self.loadingLabel = QtWidgets.QLabel("Calculam ruta…")
         self.loadingLabel.setAlignment(QtCore.Qt.AlignmentFlag.AlignCenter)
         self.loadingLabel.setStyleSheet("""
             QLabel {
@@ -69,7 +69,7 @@ class MainWindow(QMainWindow):
         """)
         self.loadingLabel.hide()
 
-        # Adăugăm în layout (FĂRĂ insert index)
+        # Adaugam in layout 
         self.ui.verticalLayout.addWidget(self.loadingLabel)
         self.ui.verticalLayout.addWidget(self.infoLabel)
 
@@ -81,7 +81,6 @@ class MainWindow(QMainWindow):
 
         self.ui.mapLabel.hide()
 
-        # (HARTĂ) 
         self.graphicsView = MapView(self.ui.centralwidget)
         self.scene = QGraphicsScene(self.graphicsView)
         self.graphicsView.setScene(self.scene)

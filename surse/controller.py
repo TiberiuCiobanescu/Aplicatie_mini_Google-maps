@@ -19,7 +19,7 @@ class Controller:
         sosire = self.ui.destLine.text().strip()
 
         if not plecare or not sosire:
-            self.ui.mapLabel.setText("Introduceți plecare și sosire!")
+            self.ui.mapLabel.setText("Introduceti plecare si sosire!")
             self.main_window.loadingLabel.hide()
             self.ui.calcButton.setEnabled(True)
             return 
