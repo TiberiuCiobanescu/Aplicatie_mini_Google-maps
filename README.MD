@@ -1,25 +1,113 @@
-Mini Google Maps
+# 🗺️ Mini Google Maps – Aplicație Desktop de Rutare
 
-###DESCRIERE
+## 📖 Prezentare generală
 
-Acest proiect reprezinta o versiune simplificata a functionalitatilor de baza ale aplicatiei Google Maps. Utilizatorul poate introduce o locatie de plecare si o locatie de destinatie, iar aplicatia calculeaza si afiseaza ruta optima dintre cele doua puncte pe o harta interactiva.
+**Mini Google Maps** este o aplicație desktop dezvoltată în **Python**, care permite utilizatorului să calculeze și să vizualizeze o rută rutieră optimă între două locații, folosind **date geografice reale furnizate de OpenStreetMap**.
 
-###FUNCTIONALITATE
+Aplicația îmbină concepte de:
+- programare orientată pe obiect  
+- grafuri și algoritmi de rutare  
+- interfețe grafice moderne  
 
-Aplicatia calculeaza automat ruta folosind date OpenStreetMap si afiseaza traseul pe harta. Dupa finalizarea calculului, sunt prezentate informatii despre distanta totala dintre puncte, timpul estimat de parcurs cu masina si timpul estimat pentru mersul pe jos. Valorile sunt obtinute pe baza lungimii reale a drumurilor si a unor viteze medii prestabilite.
+Rezultatul este o aplicație funcțională, interactivă, apropiată conceptual de un sistem de navigație real.
 
-###INTERFATA GRAFICA
+---
 
-Interfata grafica este realizata cu ajutorul bibliotecii PyQt6. Harta este afisata intr-o zona dedicata a aplicatiei si poate fi explorata prin zoom. In timpul calculului rutei, aplicatia afiseaza mesajul "Calculam ruta...", pentru a informa utilizatorul ca procesul este in desfasurare.
+## ✨ Funcționalități principale
 
-###IMPLEMENTARE
+- 📍 introducere punct de plecare și punct de sosire
+- 🛣️ calcul rută optimă pe drumuri reale
+- 📏 afișare distanță totală
+- ⏱️ estimare timp de deplasare (mașină / pieton)
+- 🗺️ afișare vizuală a rutei pe hartă
+- 🔍 zoom și pan interactiv pe hartă
+- ⚡ cache local pentru performanță ridicată
 
-Harta este descarcata o singura data si salvata local, ceea ce permite rulari mai rapide ale aplicatiei ulterior.
+---
 
-###TEHNOLOGII UTILIZATE
+## 🧰 Tehnologii utilizate
 
-Aplicatia este dezvoltata in Python 3.12 si utilizeaza biblioteci precum PyQt6 pentru interfata grafica, OSMnx si NetworkX pentru procesarea hartilor si calculul rutelor, Matplotlib pentru generarea imaginilor hartii si Geopy pentru conversia adreselor in coordonate geografice.
+### Limbaj și mediu
+- **Python 3**
+- **venv** – mediu virtual pentru izolarea dependențelor
 
-###RULARE
+### Interfață grafică
+- **PyQt6**
+- **Qt Designer**
+- **QGraphicsView / QGraphicsScene** (zoom & pan)
 
-Pentru rularea aplicatiei este necesara instalarea pachetelor specificate in fisierul requirements.txt. Aplicatia se porneste prin rularea fisierului principal, iar la prima utilizare este necesara o conexiune la internet pentru descarcarea hartii.
+### Procesare hartă și rutare
+- **OpenStreetMap** – sursă de date geografice
+- **OSMnx** – descărcare și procesare graf rutier
+- **NetworkX** – algoritmi pe grafuri
+- **GeoPy (Nominatim)** – geocodare
+- **Matplotlib** – generare hartă și rută vizuală
+
+---
+
+## 🧠 Concepte teoretice aplicate
+
+- Programare orientată pe obiect (OOP)
+- Moștenire și suprascriere de metode
+- Separarea logicii de interfață (arhitectură MVC-like)
+- Grafuri ponderate
+- Algoritmi de drum minim (shortest path)
+- Geocodare (text → coordonate)
+- Formula Haversine (distanță geografică)
+- Cache și optimizare performanță
+- Programare orientată pe evenimente
+
+---
+
+## 📁 Structura proiectului
+
+Aplicatie_mini-google_maps/
+│
+├── surse/
+│ ├── main.py # Pornirea aplicației și fereastra principală
+│ ├── controller.py # Coordonarea logicii aplicației
+│ ├── incarcare_harta.py # Descărcare hartă și calcul rută
+│ ├── vizualizare_harta.py # Generare și afișare hartă
+│ └── ui_interfata.py # Interfață grafică (Qt Designer)
+│
+├── date/
+│ ├── cache/ # Hărți salvate local (.graphml)
+│ └── imagini/ # Imagini generate cu ruta
+│
+├── venv/ # Mediu virtual Python
+└── README.md # Documentația proiectului
+
+
+---
+
+## ⚙️ Detalii de implementare
+
+- Harta rutieră este descărcată o singură dată și salvată local
+- La rulări ulterioare, aplicația folosește cache-ul
+- Harta este modelată ca graf:
+  - noduri → intersecții
+  - muchii → drumuri (cu greutate = lungime)
+- Ruta optimă este calculată folosind algoritmi de drum minim
+- Nodurile de start și final sunt determinate manual prin formula Haversine
+- Rezultatul este randat ca imagine și afișat în interfața PyQt
+
+---
+
+## ▶️ Instrucțiuni de rulare
+
+### 1️⃣ Accesarea proiectului
+```bash
+cd Aplicatie_mini-google_maps
+
+### 2️⃣ Activarea mediului virtual
+
+source venv/bin/activate
+
+### 3️⃣ Instalarea dependențelor
+pip install PyQt6 osmnx networkx geopy matplotlib
+
+### 4️⃣ Pornirea aplicației
+cd surse
+python3 main.py
+
+
