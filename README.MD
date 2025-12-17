@@ -60,25 +60,23 @@ Rezultatul este o aplicație funcțională, interactivă, apropiată conceptual 
 ---
 
 ## 📁 Structura proiectului
-
+```text
 Aplicatie_mini-google_maps/
-│
 ├── surse/
-│ ├── main.py # Pornirea aplicației și fereastra principală
-│ ├── controller.py # Coordonarea logicii aplicației
-│ ├── incarcare_harta.py # Descărcare hartă și calcul rută
-│ ├── vizualizare_harta.py # Generare și afișare hartă
-│ └── ui_interfata.py # Interfață grafică (Qt Designer)
+│   ├── main.py               # Pornirea aplicației și fereastra principală
+│   ├── controller.py         # Coordonarea logicii aplicației
+│   ├── incarcare_harta.py    # Descărcare hartă și calcul rută
+│   ├── vizualizare_harta.py  # Generare și afișare hartă
+│   └── ui_interfata.py       # Interfață grafică (Qt Designer)
 │
 ├── date/
-│ ├── cache/ # Hărți salvate local (.graphml)
-│ └── imagini/ # Imagini generate cu ruta
+│   ├── cache/                # Hărți salvate local (.graphml)
+│   └── imagini/              # Imagini generate cu ruta
 │
-├── venv/ # Mediu virtual Python
-└── README.md # Documentația proiectului
+├── venv/                     # Mediu virtual Python
+└── README.md                 # Documentația proiectului
+```
 
-
----
 
 ## ⚙️ Detalii de implementare
 
